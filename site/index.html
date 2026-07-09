@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    TÍTULO E DESCRIÇÃO
+    Aparecem na aba do navegador e nos resultados de busca do Google.
+    Troque pelo nome real do escritório e uma frase curta sobre o que ele faz.
+  -->
+  <title>GF Advogados | Advocacia Cível, Pública e Trabalhista</title>
+  <meta name="description" content="GF Advogados: segurança jurídica com ética e proximidade nas áreas Cível, Pública e Trabalhista.">
+
+  <!-- Ícone da aba do navegador (favicon): usa o mesmo logo pequeno do header -->
+  <link rel="icon" href="images/logo-pequeno.jpeg" type="image/png">
+
+  <!-- Domínio oficial do site (ajuda o Google a saber qual é a versão "certa"
+       da página, evita problemas de SEO com www vs. sem www, http vs https etc.) -->
+  <link rel="canonical" href="https://advocaciagf.com.br/">
+
+  <!--
+    FONTES
+    Não usamos mais Google Fonts: as fontes agora são arquivos próprios
+    (Ricordo Extra Light + as variações de Montserrat-Arabic), carregadas
+    via @font-face direto no css/style.css. Os arquivos .otf ficam na
+    pasta /fonts (veja fonts/LEIA-ME.txt para a lista exata de nomes).
+    Por isso não existe nenhum <link> de fonte aqui no head.
+  -->
+
+  <!-- Nosso CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Link de acessibilidade: permite pular o menu usando o teclado (tecla Tab) -->
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ==========================================================
+       HEADER / CABEÇALHO
+       Logo + menu de navegação alinhados à esquerda; ícones de
+       redes sociais alinhados à direita; botão de menu mobile
+       (hamburger) aparece só em telas pequenas.
+       ========================================================== -->
+  <header class="site-header" id="topo">
+    <div class="container header-inner">
+
+      <!-- LOGO: usa a versão pequena, pensada para caber na barra do header -->
+      <a href="#topo" class="logo" aria-label="GF Advogados - Início">
+        <img src="images/logo-pequeno.jpeg" alt="GF Advogados" class="logo-img">
+      </a>
+
+      <!-- MENU PRINCIPAL
+           Os links usam # + id, então cada <a href="#sobre"> rola a página
+           até a section com id="sobre". Adicione/remova itens à vontade. -->
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="#topo">Início</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#especialidades">Especialidades</a></li>
+          <li><a href="#socio-1">Equipe</a></li>
+          <li><a href="#contato">Localização</a></li>
+          <li><a href="https://api.whatsapp.com/send/?phone=%2B5519989793121&text&type=phone_number&app_absent=0">Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- REDES SOCIAIS
+           Ícones reais (suas imagens), um arquivo .png para cada rede.
+           Troque os href="#" pelos links reais de cada perfil. -->
+      <div class="header-social">
+        <a href="https://www.facebook.com/gf.associados" class="social-icon" aria-label="Facebook"><img src="images/facebook.png" alt="Facebook"></a>
+        <a href="#" class="social-icon" aria-label="LinkedIn"><img src="images/linkedin.png" alt="LinkedIn"></a>
+        <a href="https://www.instagram.com/gf.associados/" class="social-icon" aria-label="Instagram"><img src="images/insta.png" alt="Instagram"></a>
+        <a href="#" class="social-icon" aria-label="TikTok"><img src="images/tiktok.png" alt="TikTok"></a>
+      </div>
+
+      <!-- BOTÃO DE MENU MOBILE (hamburger)
+           Só aparece em telas pequenas (ver media query em style.css).
+           O JS (script.js) adiciona/remove a classe "nav-open" no <header>
+           quando este botão é clicado. -->
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ==========================================================
+         SEÇÃO "SOBRE" — biografia geral / história do escritório
+         Layout: parágrafo à ESQUERDA, imagem à DIREITA
+         (desktop; no celular a imagem aparece depois do texto)
+         ========================================================== -->
+    <section class="section split-section" id="sobre">
+      <div class="container split-grid">
+
+        <!-- Texto vem primeiro no HTML = fica à esquerda no desktop -->
+        <div class="split-text">
+          <h2>Nossa história</h2>
+
+          <!--
+            TEXTO PLACEHOLDER: substitua pelos parágrafos reais.
+            Pode ter quantos parágrafos quiser, o layout se ajusta sozinho.
+          -->
+          <p>
+            Desde a sua fundação, o escritório GF Advogados pautou-se na premissa de que a advocacia vai muito além da técnica: 
+            é, sobretudo, um compromisso com a ética, com a humanidade e com a busca incansável por justiça. 
+            Nascido da união de propósitos entre seus sócios fundadores, o escritório ergueu-se sobre três pilares
+             essenciais — o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente.
+          </p>
+          <p>
+            Desde a sua fundação, o escritório GF Advogados pautou-se na premissa de que a advocacia vai muito além da técnica: 
+            é, sobretudo, um compromisso com a ética, com a humanidade e com a busca incansável por justiça.
+Nossa trajetória é marcada pela busca constante por bons resultados, alcançados não por acaso, mas como consequência natural de um
+ trabalho sério, estratégico e comprometido. Atendendo pessoas físicas e jurídicas com o mesmo padrão de dedicação, entendemos que 
+ cada demanda carrega particularidades que merecem atenção individualizada.
+O GF Advogados reafirma, dia após dia, seu propósito: oferecer segurança jurídica com a solidez de quem entende que, por
+ trás de cada
+ processo, existe uma história,um direito e uma vida que merece ser defendida com competência e integridade.
+          </p>
+        </div>
+
+        <!-- Imagem vem depois no HTML = fica à direita no desktop -->
+        <div class="split-image">
+          <!-- Troque o src pela foto real dos sócios juntos -->
+          <img src="images/socios-grupo.png" alt="Sócios do escritório GF Advogados" loading="lazy">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SEÇÃO "ESPECIALIDADES"
+         Três colunas, uma para cada área de atuação.
+         ========================================================== -->
+    <section class="section specialties" id="especialidades">
+      <div class="container">
+        <h2>Especialidades</h2>
+
+        <div class="specialties-grid">
+
+          <!-- Coluna 1 -->
+          <article class="specialty-card">
+            <h3>Direito Civil</h3>
+            <p>
+              [Texto texto texto.]
+            </p>
+          </article>
+
+          <!-- Coluna 2 -->
+          <article class="specialty-card">
+            <h3>Direito Público</h3>
+            <p>
+              [Texto texto e texto.]
+            </p>
+          </article>
+
+          <!-- Coluna 3 -->
+          <article class="specialty-card">
+            <h3>Direito Trabalhista</h3>
+            <p>
+              [texo texto,o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente]
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SEÇÃO "SÓCIO 1"
+         Layout: imagem à ESQUERDA, texto à DIREITA
+         Reaproveita a mesma classe .split-grid da seção "Sobre",
+         só que com a imagem vindo ANTES do texto no HTML.
+         ========================================================== -->
+    <section class="section split-section" id="socio-1">
+      <div class="container split-grid">
+
+        <!-- Imagem vem primeiro no HTML = fica à esquerda no desktop -->
+        <div class="split-image">
+          <!-- Troque pela foto real do sócio 1 -->
+          <img src="images/socio-1.png" alt="Foto de [Nome do Sócio 1]" loading="lazy">
+        </div>
+
+        <!-- Texto vem depois no HTML = fica à direita no desktop -->
+        <div class="split-text">
+          <h2>Dr. Felipe Ferreira</h2>
+          <p>
+            Graduado em Direito pela UNIFACP, pós-graduado em Direito e Processo do Trabalho pela renomada PUC-Campinas
+             e especialista em tecnologia jurídica e inovação aplicada ao Direito. Pautando sua atuação pela estrita neutralidade, 
+             isenção e independência técnica, possui plena aptidão para analisar a relação de emprego sob todas as suas óticas, 
+             desenvolvendo teses estratégicas com igual eficácia e precisão prática tanto em favor do reclamante quanto da reclamada, 
+             tanto do empregado quanto do empregador. Unindo profundo conhecimento das leis trabalhistas à análise digital de dados e 
+             ferramentas de alta performance, estrutura ações e defesas cirúrgicas, oferecendo uma condução livre de vieses, focada 
+             puramente na excelência técnica processual, na mitigação de riscos e na busca pela melhor solução jurídica para o caso 
+             concreto, independentemente da posição ocupada na lide
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SEÇÃO DE VÍDEO
+         Vídeo de fundo que toca automaticamente quando o usuário
+         rola a página até ele (e pausa quando sai da tela — ver script.js).
+         Duas caixas com fundo semitransparente sobrepostas ao vídeo,
+         uma mais à esquerda e outra mais à direita.
+         ========================================================== -->
+    <section class="section video-section" id="video">
+      <div class="video-wrapper">
+
+        <!--
+          VÍDEO
+          - muted é obrigatório para o autoplay funcionar na maioria dos navegadores
+          - loop faz o vídeo repetir
+          - playsinline evita que o vídeo abra em tela cheia automaticamente no iPhone
+          - poster é a imagem mostrada antes do vídeo carregar/tocar
+          - troque o src abaixo pelo caminho do seu arquivo de vídeo
+        -->
+        <video class="bg-video" id="bgVideo" muted loop playsinline preload="metadata" poster="images/video-poster.jpg">
+          <source src="videos/video.mp4" type="video/mp4">
+          Seu navegador não suporta a exibição de vídeos HTML5.
+        </video>
+
+        <!-- Camada com as duas caixas de texto sobre o vídeo -->
+        <div class="video-overlay">
+          <div class="overlay-box overlay-box--left">
+            <p>Texto exemplo: o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. </p>
+          </div>
+          <div class="overlay-box overlay-box--right">
+            <p>[Texto exemplo: o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente,.]</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SEÇÃO "SÓCIO 2"
+         Layout: texto à ESQUERDA, imagem à DIREITA
+         (mesmo padrão da seção "Sobre")
+         ========================================================== -->
+    <section class="section split-section" id="socio-2">
+      <div class="container split-grid">
+
+        <div class="split-text">
+          <h2>Dr. Samuel Lucio Gomes</h2>
+          <p>
+            Advogado com mais de 8 anos de formação, pós-graduando em Direito Processual Civil pela Escola Superior da Advocacia, 
+            com atuação dedicada à defesa dos direitos de servidores públicos — celetistas e estatutários — das mais diversas áreas
+             e níveis da Federação.
+          </p>
+          <p>
+            Sólida experiência em pleitear direitos que a Administração Pública frequentemente negligencia, atuando na busca de 
+            progressões de carreira, reajustes salariais e no enquadramento correto de profissionais do Serviço Público. Minha prática
+             abrange tanto o contencioso cível quanto a consultoria estratégica, oferecendo a servidores públicos segurança jurídica e 
+             respostas efetivas para garantir os direitos que
+             lhes são devidos, sem incorrer na violação dos limites constitucionais.
+          </p>
+        </div>
+
+        <div class="split-image">
+          <!-- Troque pela foto real do sócio 2 -->
+          <img src="images/socio-2.png" alt="Foto de [Nome do Sócio 2]" loading="lazy">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         SEÇÃO "LOCALIZAÇÃO" (também serve como âncora do menu "Contato")
+         Texto com endereço/telefone/e-mail + mapa do Google Maps incorporado.
+         ========================================================== -->
+    <section class="section location" id="contato">
+      <div class="container location-grid">
+
+        <div class="location-text">
+          <h2>Localização</h2>
+          <p><strong>Endereço:</strong> Rua Salvador Lombardi Netto, 370 - Nova Paulínia, Paulínia - SP, 13140-284</p>
+          <p><strong>Telefone:</strong> +55 19 98979-3121</p>
+          <p><strong>E-mail:</strong> adv524822@gmail.com</p>
+        </div>
+
+        <div class="location-map">
+          <!--
+            MAPA DO GOOGLE MAPS
+            Para colocar o endereço real do escritório:
+            1. Abra o Google Maps e busque o endereço
+            2. Clique em "Compartilhar" -> "Incorporar um mapa"
+            3. Copie o link que aparece dentro de src="..." e cole abaixo
+            (o link de exemplo abaixo é só um placeholder genérico)
+          -->
+
+
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3678.9468029532486!2d-47.149613599999995!3d-22.7673554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8bfe272cb3129%3A0x914361bb1eab82!2sRua%20Salvador%20Lombardi%20Netto%2C%20370%20-%20Sl%205%20-%20Nova%20Paul%C3%ADnia%2C%20Paul%C3%ADnia%20-%20SP%2C%2013140-284!5e0!3m2!1spt-BR!2sbr!4v1783629154103!5m2!1spt-BR!2sbr"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização do escritório no Google Maps">
+          </iframe>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================
+       FOOTER / RODAPÉ
+       ========================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+        <!-- Aqui usamos a versão grande do logo, já que o rodapé tem mais espaço -->
+        <img src="images/logo-preto.jpeg" alt="GF Advogados" class="footer-logo-img">
+      </div>
+
+      <nav class="footer-nav">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#especialidades">Especialidades</a></li>
+          <li><a href="#socio-1">Equipe</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-social">
+        <h3>Redes sociais</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/gf.associados" class="social-icon" aria-label="Facebook"><img src="images/facebook.png" alt="Facebook"></a>
+          <a href="#" class="social-icon" aria-label="LinkedIn"><img src="images/linkedin.png" alt="LinkedIn"></a>
+          <a href="https://www.instagram.com/gf.associados/" class="social-icon" aria-label="Instagram"><img src="images/insta.png" alt="Instagram"></a>
+          <a href="#" class="social-icon" aria-label="TikTok"><img src="images/tiktok.png" alt="TikTok"></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <!-- O ano é preenchido automaticamente pelo script.js (não precisa editar) -->
+      <p>&copy; <span id="year"></span> GF Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Nosso JavaScript (menu mobile + vídeo que toca ao rolar a página) -->
+  <script src="js/script.js"></script>
+</body>
+</html>

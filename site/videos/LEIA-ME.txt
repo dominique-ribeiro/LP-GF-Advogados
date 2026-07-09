@@ -1,0 +1,16 @@
+Coloque aqui o vídeo real com o nome "video-escritorio.mp4"
+(ou troque o nome do arquivo referenciado dentro de index.html).
+
+Dicas:
+- Formato recomendado: MP4 (codec H.264), sem áudio ou com áudio
+  (o vídeo toca sempre mudo — "muted" — por exigência dos navegadores
+  para permitir autoplay).
+- Tente manter o arquivo leve (idealmente abaixo de 10-15 MB) para o
+  site carregar rápido, especialmente no celular.
+- Hospedagens gratuitas como GitHub Pages têm limite de tamanho por
+  arquivo (recomendado ficar bem abaixo de 100 MB). Se o vídeo for
+  pesado, considere:
+    a) comprimir o vídeo (ex.: usando o site https://www.freeconvert.com
+       ou o programa HandBrake, gratuito), ou
+    b) hospedar o vídeo no YouTube/Vimeo e trocar a tag <video> por um
+       <iframe> incorporado (me pergunte se quiser ajuda com isso).

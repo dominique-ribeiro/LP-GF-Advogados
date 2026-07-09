@@ -1,0 +1,755 @@
+/* ============================================================
+   1. CONFIGURAÇÕES GERAIS — CORES, FONTES E ESPAÇAMENTOS
+   ------------------------------------------------------------
+   Este é o único lugar que você precisa mexer para trocar a
+   paleta de cores ou as fontes do site inteiro. Todo o resto
+   do CSS usa estas variáveis (var(--nome-da-variavel)).
+   ============================================================ */
+:root {
+  /* Cores principais (paleta oficial da marca) */
+  --color-bg: #FFFFFF;             /* fundo geral do site */
+  --color-surface: #FFFFFF;        /* fundo de cartões/caixas */
+  --color-primary: #5A0606;        /* bordô escuro - cor de marca principal */
+  --color-primary-light: #7A1414;  /* variação mais clara do bordô, usada em hover
+                                       (derivada automaticamente; ajuste se quiser) */
+  --color-accent: #E3A443;         /* dourado/âmbar - detalhes e destaques */
+  --color-accent-light: #F1B36A;   /* dourado mais claro - hovers e variação */
+  /* PENDENTE: o código enviado para a 5ª cor veio incompleto ("#D672A" tem só
+     5 dígitos — um hexadecimal válido precisa de 3 ou 6). Por enquanto essa
+     variável está reaproveitando --color-accent-light; assim que você confirmar
+     o valor certo, é só atualizar aqui. */
+  --color-accent-deep: #F1B36A;    /* TODO: confirmar/trocar pelo código correto */
+  --color-text: #000000;           /* cor do texto principal */
+  --color-text-soft: #4D4D4D;      /* cinza-escuro para texto secundário/legendas */
+  --color-border: rgba(0, 0, 0, 0.12);
+
+  /*
+    FONTES (self-hosted — ver os @font-face logo abaixo)
+    - Ricordo Extra Light: usada nos títulos (h1, h2, h3) e no logotipo em texto
+    - Montserrat Arabic: usada no texto corrido (parágrafos, menu, botões),
+      com pesos de 250 (Thin) a 900 (Black) disponíveis
+  */
+  --font-display: 'Ricordo', Georgia, serif;
+  --font-body: 'Montserrat Arabic', Arial, sans-serif;
+
+  /* Medidas reutilizadas em várias seções */
+  --container-width: 1140px;
+  --section-padding-y: 96px;
+  --radius: 4px; /* cantos levemente arredondados; use 0 para cantos retos */
+}
+
+/* ============================================================
+   1B. FONTES PRÓPRIAS (@font-face)
+   ------------------------------------------------------------
+   Coloque os arquivos .otf reais dentro da pasta /fonts, usando
+   EXATAMENTE os mesmos nomes de arquivo que você já tem (com
+   espaços mesmo — url() aceita espaço numa string entre aspas).
+   Veja fonts/LEIA-ME.txt para a lista completa.
+
+   Só existe UM peso do Ricordo (Extra Light), então declaramos
+   `font-weight: 100 900;` nele — isso avisa o navegador que esse
+   arquivo cobre qualquer peso pedido, evitando que ele tente
+   "inventar" um negrito falso (bold sintético/borrado) quando
+   algum elemento pedir font-weight mais forte.
+   ============================================================ */
+@font-face {
+  font-family: 'Ricordo';
+  src: url('../fonts/RICORDO-ExtraLight(1).ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic Thin 250.otf') format('opentype');
+  font-weight: 250;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic ExtraLight 275.otf') format('opentype');
+  font-weight: 275;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic Light 300.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic Regular 400.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic Medium 500.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic SemiBold 600.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic Bold 700.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic ExtraBold 800.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat Arabic';
+  src: url('../fonts/Montserrat-Arabic Black 900.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   2. RESET BÁSICO
+   ------------------------------------------------------------
+   Remove estilos padrão do navegador que variam de navegador
+   para navegador, para começarmos de um ponto neutro.
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* rolagem suave ao clicar em links do menu (#ancoras) */
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  /* Peso do texto corrido (parágrafos, cards, rodapé etc.). O Montserrat
+     "Regular" (400) tem traços mais grossos que outras fontes que a gente
+     costuma usar por padrão, então parece "bold" mesmo sem ser negrito de
+     verdade. Aqui usamos 300 (Light) como peso padrão do site inteiro.
+     Pesos disponíveis pra trocar: 250 (Thin), 275 (ExtraLight), 300 (Light),
+     400 (Regular), 500 (Medium) — veja fonts/LEIA-ME.txt para os demais. */
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem); /* fluido: cresce com a tela */
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Foco visível ao navegar com teclado (Tab) — acessibilidade */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Respeita usuários que pedem "menos animações" no sistema operacional */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   3. CLASSES UTILITÁRIAS (reaproveitadas em várias seções)
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: var(--section-padding-y) 0;
+}
+
+/* Pequeno rótulo acima dos títulos de seção, ex: "§ Sobre o escritório".
+   Usamos o símbolo de parágrafo (§) como referência ao universo jurídico. */
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+}
+
+/* Link "pular para o conteúdo" — só aparece quando recebe foco do teclado */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  z-index: 1000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+/* ============================================================
+   4. HEADER / NAVEGAÇÃO
+   ============================================================ */
+.site-header {
+  background-color: var(--color-primary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 76px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* sem margin-right:auto aqui: o logo fica coladinho ao menu, os dois à esquerda */
+}
+
+.logo-img {
+  height: 40px;  /* ajuste esse valor se o logo ficar grande/pequeno demais */
+  width: auto;
+  display: block;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 32px;
+}
+
+.main-nav a {
+  color: var(--color-accent-light); /* dourado mais claro */
+  font-size: 0.95rem;
+  font-weight: 300;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.main-nav a:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent); /* dourado mais escuro no hover/seleção */
+}
+
+.header-social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto; /* empurra só os ícones sociais para a direita */
+}
+
+/* Ícones = suas imagens .png (não são mais texto/círculo desenhado no CSS).
+   O tamanho final do ícone é controlado pelo arquivo de imagem em si;
+   aqui só definimos a altura de exibição e um efeito sutil de hover. */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon img {
+  height: 40px; /* mesmo tamanho do logo do header (.logo-img) */
+  width: auto;
+  display: block;
+}
+
+.social-icon:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+/* Botão de menu mobile (hamburger): escondido no desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+}
+
+/* ============================================================
+   5. SEÇÕES "SPLIT" (texto + imagem lado a lado)
+   ------------------------------------------------------------
+   Usada em três lugares: "Sobre" (texto|imagem), "Sócio 1"
+   (imagem|texto) e "Sócio 2" (texto|imagem). A ordem de quem
+   fica à esquerda/direita é definida pela ORDEM no HTML, não
+   por classes diferentes — assim reaproveitamos o mesmo CSS.
+   ============================================================ */
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.split-text h2 {
+  margin-bottom: 20px;
+}
+
+/* Texto justificado: alinha as bordas esquerda E direita do parágrafo.
+   `hyphens: auto` liga a hifenização automática do navegador (usando o
+   `lang="pt-BR"` lá do <html>), o que evita "buracos" de espaço grandes
+   demais entre palavras quando o texto é justificado. */
+.split-text p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/*
+   A coluna da imagem "vaza" verticalmente (vira um retângulo do tamanho da
+   linha do grid + o padding da seção pra cima e pra baixo). Vale pras três
+   seções que usam essa classe: "Sobre", "Sócio 1" e "Sócio 2".
+   Como a foto se encaixa nesse retângulo:
+   - width: 96% + centralizada -> a largura NUNCA é cortada (a imagem
+     sempre aparece inteira), com uma folguinha nas laterais
+   - height: auto no <img> -> a altura acompanha a largura, respeitando a
+     proporção original da foto (sem esticar)
+   - a foto é ANCORADA EM CIMA (top: 0) -> o topo dela (o rosto, no caso
+     das fotos dos sócios) NUNCA é cortado. Se a foto for mais alta que o
+     espaço disponível, o excesso é escondido embaixo (overflow: hidden no
+     contêiner); se for mais baixa, sobra um espacinho embaixo antes do
+     fim da seção, em vez de cortar o topo.
+   Ou seja: o topo da foto nunca é tocado — o que varia, dependendo da
+   foto, é se o final dela bate exatamente na virada de seção ou sobra
+   uma folguinha embaixo.
+*/
+.split-image {
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+  height: calc(100% + (var(--section-padding-y) * 2));
+  margin-top: calc(-1 * var(--section-padding-y));
+  margin-bottom: calc(-1 * var(--section-padding-y));
+  /* Cor de fundo mostrada SÓ quando a imagem falha ao carregar (link quebrado)
+     ou enquanto ela ainda não existe. Usamos a mesma cor do fundo da página
+     (--color-bg) e não um cinza (--color-border): assim, se a sua foto tiver
+     fundo transparente (PNG/WebP), a transparência "funde" com a página em
+     vez de aparecer um retângulo cinza por trás dela. */
+  background-color: var(--color-bg);
+}
+
+.split-image img {
+  position: absolute;
+  top: 0; /* ancorada em cima: o rosto/topo da foto nunca é cortado */
+  left: 50%;
+  transform: translateX(-50%); /* centraliza horizontalmente */
+  width: 96%; /* um pouquinho menor que a coluna inteira (100%), pra garantir
+                 uma folguinha nas laterais e a foto nunca encostar na borda */
+  height: auto; /* mantém a proporção original — nunca esticada, nunca cortada nos lados */
+}
+
+/* Seções de sócio individual usam um fundo levemente diferente
+   para criar variação visual ao longo da página */
+#socio-1, #socio-2 {
+  background-color: var(--color-surface);
+}
+
+/* Exceção: o "Sócio 2" usa o mesmo esquema vermelho/dourado/branco da
+   seção "Especialidades" (pedido específico) — sobrescreve a regra
+   compartilhada logo acima. */
+#socio-2 {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+#socio-2 .split-text h2 {
+  color: var(--color-accent-light); /* dourado mais claro, igual ao título de "Especialidades" */
+}
+
+#socio-2 .split-text p {
+  color: #fff;
+}
+
+#socio-2 .split-image {
+  background-color: var(--color-primary); /* fallback igual ao fundo da seção, caso a foto falhe */
+}
+
+/* ============================================================
+   6. SEÇÃO "ESPECIALIDADES"
+   ============================================================ */
+.specialties {
+  text-align: center;
+  background-color: var(--color-primary); /* vermelho/bordô da marca */
+  color: #fff;
+}
+
+.specialties h2 {
+  margin-bottom: 48px;
+  color: var(--color-accent-light); /* dourado mais claro */
+}
+
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  text-align: left;
+}
+
+/* Os "cards" não têm mais fundo próprio: como agora ficam direto sobre o
+   vermelho da seção, um fundo branco esconderia o texto branco de dentro.
+   O border-top continua como um separador visual sutil no topo de cada um. */
+.specialty-card {
+  background-color: transparent;
+  border-top: 3px solid var(--color-accent);
+  padding: 32px 0 0;
+}
+
+.specialty-card h3 {
+  margin-bottom: 12px;
+  color: var(--color-accent); /* dourado intermediário */
+}
+
+.specialty-card p {
+  color: #fff;
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   7. SEÇÃO DE VÍDEO
+   ------------------------------------------------------------
+   O vídeo ocupa a largura toda; duas caixas semitransparentes
+   ficam sobrepostas a ele (uma mais alta à esquerda, outra
+   mais baixa à direita, para criar uma composição diagonal).
+   ============================================================ */
+.video-section {
+  padding: 0; /* o vídeo já ocupa a seção inteira, sem respiro nas bordas */
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 420px;
+  overflow: hidden;
+  background-color: var(--color-primary); /* aparece enquanto o vídeo carrega */
+}
+
+.bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 6%;
+}
+
+.overlay-box {
+  max-width: 320px;
+  background-color: rgba(90, 6, 6, 0.6); /* var(--color-primary) com transparência */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  padding: 28px 32px;
+}
+
+.overlay-box p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+.overlay-box--left {
+  border-left: 3px solid var(--color-accent);
+  align-self: flex-start;
+  margin-top: 48px;
+}
+
+.overlay-box--right {
+  border-right: 3px solid var(--color-accent);
+  align-self: flex-end;
+  margin-bottom: 48px;
+  text-align: right;
+}
+
+/* ============================================================
+   8. SEÇÃO "LOCALIZAÇÃO" (mapa)
+   ============================================================ */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.location-map {
+  width: 100%;
+  height: 360px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ============================================================
+   9. FOOTER / RODAPÉ
+   ============================================================ */
+.site-footer {
+  background-color: #000; /* preto, como pedido (diferente do vermelho usado no resto do site) */
+  color: #fff;
+  padding-top: 64px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-logo-img {
+  width: 50%; /* ocupa toda a largura da coluna (o "terço" onde ele fica) */
+  height: auto; /* a altura acompanha, mantendo a proporção original do logo */
+  display: block;
+  margin-bottom: 16px;
+}
+
+.footer-nav h3,
+.footer-social h3 {
+  font-family: var(--font-body);
+  color: var(--color-accent); /* dourado — continua igual, só o fundo/texto mudaram */
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav a:hover {
+  color: var(--color-accent-light);
+}
+
+.footer-social .social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-bottom {
+  padding: 20px 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+/* ============================================================
+   10. RESPONSIVO — TABLET (telas até 900px)
+   ------------------------------------------------------------
+   É aqui também que o menu vira "hamburger": em telas de tablet
+   para baixo já trocamos o menu horizontal pelo botão, para o
+   cabeçalho não ficar espremido com logo + menu + ícones sociais.
+   ============================================================ */
+@media (max-width: 900px) {
+  :root {
+    --section-padding-y: 64px;
+  }
+
+  .header-inner {
+    height: 64px;
+  }
+
+  /* Esconde o menu e os ícones sociais do header por padrão... */
+  .main-nav,
+  .header-social {
+    display: none;
+  }
+
+  /* ...e mostra o botão de hamburger */
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* Quando o JS adiciona a classe "nav-open" no <header>, o menu aparece
+     como uma lista vertical logo abaixo da barra do cabeçalho */
+  .site-header.nav-open .main-nav {
+    display: block;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background-color: var(--color-primary);
+    padding: 16px 24px 24px;
+  }
+
+  .site-header.nav-open .main-nav ul {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .split-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Em telas empilhadas (texto em cima, imagem embaixo, ou vice-versa) o
+     "vazamento" vertical da imagem não faz sentido — aqui ela volta a ser
+     uma imagem normal. Repare que NÃO usamos aspect-ratio nem object-fit
+     aqui: é só width:100% + height:auto, ou seja, a foto sempre aparece
+     INTEIRA (nunca cortada, nem dos lados nem de cima/baixo) — se ela não
+     couber direitinho numa proporção "bonita", ela simplesmente encolhe
+     pra caber na largura, mantendo a proporção original. */
+  .split-image {
+    position: static;
+    overflow: visible;
+    align-self: auto;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .split-image img {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+
+  .specialties-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .location-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================================
+   11. RESPONSIVO — CELULAR (telas até 600px)
+   ============================================================ */
+@media (max-width: 600px) {
+  .specialties-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-wrapper {
+    height: 50vh;
+    min-height: 320px;
+  }
+
+  .video-overlay {
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .overlay-box,
+  .overlay-box--left,
+  .overlay-box--right {
+    max-width: none;
+    align-self: stretch;
+    margin: 0;
+    text-align: left;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

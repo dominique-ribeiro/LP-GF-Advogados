@@ -1,0 +1,15 @@
+Coloque suas imagens reais nesta pasta, usando exatamente estes nomes
+(ou troque os nomes dos arquivos referenciados dentro de index.html):
+
+- favicon.ico            -> ícone da aba do navegador
+- logo.svg (opcional)     -> se você tiver um logo de verdade, use no lugar
+                             do logo em texto (ver comentário no index.html)
+- socios-grupo.jpg        -> foto dos dois sócios juntos (seção "Sobre")
+- socio-1.jpg             -> foto individual do sócio 1
+- socio-2.jpg             -> foto individual do sócio 2
+- video-poster.jpg        -> uma imagem estática (frame) do vídeo, mostrada
+                             antes do vídeo carregar/tocar
+
+Dica de proporção: as fotos dos sócios (socios-grupo, socio-1, socio-2)
+ficam melhores em fotos verticais ou quadradas, já que o CSS corta a
+imagem numa proporção 4:5 (aspect-ratio) dentro do quadro.
