@@ -313,9 +313,9 @@ button:focus-visible {
   margin-left: auto; /* empurra só os ícones sociais para a direita */
 }
 
-/* Ícones = suas imagens .png (não são mais texto/círculo desenhado no CSS).
-   O tamanho final do ícone é controlado pelo arquivo de imagem em si;
-   aqui só definimos a altura de exibição e um efeito sutil de hover. */
+/* Ícones agora são SVGs embutidos (Bootstrap Icons, licença MIT) — não
+   dependem mais de arquivos de imagem. A cor de cada um é controlada
+   aqui via `fill`, separada para header (dourado claro) e footer (branco). */
 .social-icon {
   display: inline-flex;
   align-items: center;
@@ -323,10 +323,18 @@ button:focus-visible {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.social-icon img {
-  height: 40px; /* mesmo tamanho do logo do header (.logo-img) */
-  width: auto;
+.social-svg {
+  width: 26px;
+  height: 26px;
   display: block;
+}
+
+.header-social .social-svg {
+  fill: var(--color-accent-light); /* dourado mais claro, igual ao menu */
+}
+
+.footer-social .social-svg {
+  fill: #fff;
 }
 
 .social-icon:hover {
@@ -612,6 +620,38 @@ button:focus-visible {
 }
 
 /* ============================================================
+   9B. BOTÃO FLUTUANTE DO WHATSAPP
+   ------------------------------------------------------------
+   Fica fixo no canto inferior direito, sempre visível (mesmo
+   rolando a página), tanto no desktop quanto no celular.
+   ============================================================ */
+.whatsapp-float {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #25D366; /* verde oficial do WhatsApp */
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  z-index: 999; /* fica acima de tudo, inclusive do header sticky */
+  transition: transform 0.2s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+}
+
+.whatsapp-icon {
+  width: 32px;
+  height: 32px;
+  fill: #fff; /* cor do ícone — troque aqui se quiser outra cor */
+}
+
+/* ============================================================
    10. RESPONSIVO — TABLET (telas até 900px)
    ------------------------------------------------------------
    É aqui também que o menu vira "hamburger": em telas de tablet
@@ -701,9 +741,36 @@ button:focus-visible {
     align-self: stretch;
     margin: 0;
     text-align: left;
+    /* Mais transparente só no celular (pedido do cliente): 0.35 de opacidade
+       em vez do 0.6 usado no desktop (ver .overlay-box lá em cima). */
+    background-color: rgba(90, 6, 6, 0.35);
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* ORDEM NO CELULAR: as seções "Sobre" e "Sócio 2" têm o texto ANTES da
+     imagem no HTML (necessário pro layout "texto|imagem" no desktop). Só
+     no celular, usamos `order` pra mostrar a imagem primeiro em todas as
+     seções, deixando o padrão consistente: imagem, depois texto, sempre.
+     (A seção "Sócio 1" já tem a imagem primeiro no HTML, então não precisa
+     de ajuste aqui.) O `order` só reorganiza visualmente — não muda o
+     HTML nem afeta o layout do desktop. */
+  #sobre .split-image,
+  #socio-2 .split-image {
+    order: -1;
+  }
+
+  .whatsapp-float {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .whatsapp-icon {
+    width: 28px;
+    height: 28px;
   }
 }
