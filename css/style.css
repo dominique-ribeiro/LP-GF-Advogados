@@ -385,72 +385,51 @@ button:focus-visible {
 }
 
 /*
-   A coluna da imagem "vaza" verticalmente (vira um retângulo do tamanho da
-   linha do grid + o padding da seção pra cima e pra baixo). Vale pras três
-   seções que usam essa classe: "Sobre", "Sócio 1" e "Sócio 2".
-   Como a foto se encaixa nesse retângulo:
-   - width: 96% + centralizada -> a largura NUNCA é cortada (a imagem
-     sempre aparece inteira), com uma folguinha nas laterais
-   - height: auto no <img> -> a altura acompanha a largura, respeitando a
-     proporção original da foto (sem esticar)
-   - a foto é ANCORADA EM CIMA (top: 0) -> o topo dela (o rosto, no caso
-     das fotos dos sócios) NUNCA é cortado. Se a foto for mais alta que o
-     espaço disponível, o excesso é escondido embaixo (overflow: hidden no
-     contêiner); se for mais baixa, sobra um espacinho embaixo antes do
-     fim da seção, em vez de cortar o topo.
-   Ou seja: o topo da foto nunca é tocado — o que varia, dependendo da
-   foto, é se o final dela bate exatamente na virada de seção ou sobra
-   uma folguinha embaixo.
+   A pedido do cliente: nada de "vazamento" até a borda da seção. A foto
+   agora fica centralizada dentro do padding normal da seção, como uma
+   foto emoldurada — nunca é cortada (nem dos lados, nem em cima, nem
+   embaixo): ela simplesmente encolhe para caber, mantendo a proporção
+   original (igual ao comportamento que já usávamos no celular).
 */
 .split-image {
-  position: relative;
-  overflow: hidden;
-  align-self: stretch;
-  height: calc(100% + (var(--section-padding-y) * 2));
-  margin-top: calc(-1 * var(--section-padding-y));
-  margin-bottom: calc(-1 * var(--section-padding-y));
-  /* Cor de fundo mostrada SÓ quando a imagem falha ao carregar (link quebrado)
-     ou enquanto ela ainda não existe. Usamos a mesma cor do fundo da página
-     (--color-bg) e não um cinza (--color-border): assim, se a sua foto tiver
-     fundo transparente (PNG/WebP), a transparência "funde" com a página em
-     vez de aparecer um retângulo cinza por trás dela. */
-  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .split-image img {
-  position: absolute;
-  top: 0; /* ancorada em cima: o rosto/topo da foto nunca é cortado */
-  left: 50%;
-  transform: translateX(-50%); /* centraliza horizontalmente */
-  width: 96%; /* um pouquinho menor que a coluna inteira (100%), pra garantir
-                 uma folguinha nas laterais e a foto nunca encostar na borda */
-  height: auto; /* mantém a proporção original — nunca esticada, nunca cortada nos lados */
+  width: 100%;
+  max-width: 420px; /* evita que a foto fique enorme numa coluna larga */
+  height: auto;
+  /* "Moldura" branca + sombra suave — dá um efeito de foto emoldurada,
+     que ajuda a foto se destacar tanto no fundo branco quanto no
+     vermelho (seção "Sócio 2"). Ajuste a cor/tamanho da borda e a
+     intensidade da sombra à vontade. */
+  border: 10px solid #fff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
 }
 
-/* Seções de sócio individual usam um fundo levemente diferente
-   para criar variação visual ao longo da página */
-#socio-1, #socio-2 {
-  background-color: var(--color-surface);
-}
+/* Seções de sócio individual: como as duas agora usam o mesmo esquema
+   vermelho/dourado/branco (pedido do cliente), essa regra de fundo
+   "branco" não se aplica mais a nenhuma delas — deixei comentada aqui
+   só como referência, caso você queira voltar uma delas pro branco. */
+/* #socio-1, #socio-2 { background-color: var(--color-surface); } */
 
-/* Exceção: o "Sócio 2" usa o mesmo esquema vermelho/dourado/branco da
-   seção "Especialidades" (pedido específico) — sobrescreve a regra
-   compartilhada logo acima. */
+#socio-1,
 #socio-2 {
   background-color: var(--color-primary);
   color: #fff;
 }
 
+#socio-1 .split-text h2,
 #socio-2 .split-text h2 {
   color: var(--color-accent-light); /* dourado mais claro, igual ao título de "Especialidades" */
 }
 
+#socio-1 .split-text p,
 #socio-2 .split-text p {
   color: #fff;
-}
-
-#socio-2 .split-image {
-  background-color: var(--color-primary); /* fallback igual ao fundo da seção, caso a foto falhe */
 }
 
 /* ============================================================
@@ -594,7 +573,7 @@ button:focus-visible {
 }
 
 .footer-logo-img {
-  width: 50%; /* ocupa toda a largura da coluna (o "terço" onde ele fica) */
+  width: 100%; /* ocupa toda a largura da coluna (o "terço" onde ele fica) */
   height: auto; /* a altura acompanha, mantendo a proporção original do logo */
   display: block;
   margin-bottom: 16px;
@@ -679,31 +658,6 @@ button:focus-visible {
   .split-grid {
     grid-template-columns: 1fr;
     gap: 32px;
-  }
-
-  /* Em telas empilhadas (texto em cima, imagem embaixo, ou vice-versa) o
-     "vazamento" vertical da imagem não faz sentido — aqui ela volta a ser
-     uma imagem normal. Repare que NÃO usamos aspect-ratio nem object-fit
-     aqui: é só width:100% + height:auto, ou seja, a foto sempre aparece
-     INTEIRA (nunca cortada, nem dos lados nem de cima/baixo) — se ela não
-     couber direitinho numa proporção "bonita", ela simplesmente encolhe
-     pra caber na largura, mantendo a proporção original. */
-  .split-image {
-    position: static;
-    overflow: visible;
-    align-self: auto;
-    height: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .split-image img {
-    position: static;
-    left: auto;
-    transform: none;
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius);
   }
 
   .specialties-grid {

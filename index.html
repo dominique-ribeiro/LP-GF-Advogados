@@ -90,44 +90,42 @@
   <main id="conteudo">
 
     <!-- ==========================================================
-         SEÇÃO "SOBRE" — biografia geral / história do escritório
-         Layout: parágrafo à ESQUERDA, imagem à DIREITA
-         (desktop; no celular a imagem aparece depois do texto)
+         SEÇÃO DE VÍDEO
+         Vídeo de fundo que toca automaticamente quando o usuário
+         rola a página até ele (e pausa quando sai da tela — ver script.js).
+         Duas caixas com fundo semitransparente sobrepostas ao vídeo,
+         uma mais à esquerda e outra mais à direita.
+         NOVA ORDEM: essa seção agora é a primeira depois do header,
+         a pedido do cliente.
          ========================================================== -->
-    <section class="section split-section" id="sobre">
-      <div class="container split-grid">
+    <section class="section video-section" id="video">
+      <div class="video-wrapper">
 
-        <!-- Texto vem primeiro no HTML = fica à esquerda no desktop -->
-        <div class="split-text">
-          <h2>Nossa história</h2>
+        <!--
+          VÍDEO
+          - muted é obrigatório para o autoplay funcionar na maioria dos navegadores
+          - loop faz o vídeo repetir
+          - playsinline evita que o vídeo abra em tela cheia automaticamente no iPhone
+          - poster é a imagem mostrada antes do vídeo carregar/tocar
+          - troque o src abaixo pelo caminho do seu arquivo de vídeo
+        -->
+        <video class="bg-video" id="bgVideo" muted loop playsinline preload="metadata" poster="images/video-poster.jpg">
+          <source src="videos/video.mp4" type="video/mp4">
+          Seu navegador não suporta a exibição de vídeos HTML5.
+        </video>
 
-          <!--
-            TEXTO PLACEHOLDER: substitua pelos parágrafos reais.
-            Pode ter quantos parágrafos quiser, o layout se ajusta sozinho.
-          -->
-          <p>
-            Desde a sua fundação, o escritório GF Advogados pautou-se na premissa de que a advocacia vai muito além da técnica: 
-            é, sobretudo, um compromisso com a ética, com a humanidade e com a busca incansável por justiça. 
-            Nascido da união de propósitos entre seus sócios fundadores, o escritório ergueu-se sobre três pilares
-             essenciais — o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
-              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente.
-          </p>
-          <p>
-            Desde a sua fundação, o escritório GF Advogados pautou-se na premissa de que a advocacia vai muito além da técnica: 
-            é, sobretudo, um compromisso com a ética, com a humanidade e com a busca incansável por justiça.
-Nossa trajetória é marcada pela busca constante por bons resultados, alcançados não por acaso, mas como consequência natural de um
- trabalho sério, estratégico e comprometido. Atendendo pessoas físicas e jurídicas com o mesmo padrão de dedicação, entendemos que 
- cada demanda carrega particularidades que merecem atenção individualizada.
-O GF Advogados reafirma, dia após dia, seu propósito: oferecer segurança jurídica com a solidez de quem entende que, por
- trás de cada
- processo, existe uma história,um direito e uma vida que merece ser defendida com competência e integridade.
-          </p>
-        </div>
-
-        <!-- Imagem vem depois no HTML = fica à direita no desktop -->
-        <div class="split-image">
-          <!-- Troque o src pela foto real dos sócios juntos -->
-          <img src="images/socios-grupo.png" alt="Sócios do escritório GF Advogados" loading="lazy">
+        <!-- Camada com as duas caixas de texto sobre o vídeo -->
+        <div class="video-overlay">
+          <div class="overlay-box overlay-box--left">
+            <p>Texto exemplo: o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. </p>
+          </div>
+          <div class="overlay-box overlay-box--right">
+            <p>[Texto exemplo: o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente,.]</p>
+          </div>
         </div>
 
       </div>
@@ -173,6 +171,51 @@ O GF Advogados reafirma, dia após dia, seu propósito: oferecer segurança jur�
     </section>
 
     <!-- ==========================================================
+         SEÇÃO "SOBRE" — biografia geral / história do escritório
+         Layout: parágrafo à ESQUERDA, imagem à DIREITA
+         (desktop; no celular a imagem aparece depois do texto)
+         ========================================================== -->
+    <section class="section split-section" id="sobre">
+      <div class="container split-grid">
+
+        <!-- Texto vem primeiro no HTML = fica à esquerda no desktop -->
+        <div class="split-text">
+          <h2>Nossa história</h2>
+
+          <!--
+            TEXTO PLACEHOLDER: substitua pelos parágrafos reais.
+            Pode ter quantos parágrafos quiser, o layout se ajusta sozinho.
+          -->
+          <p>
+            Desde a sua fundação, o escritório GF Advogados pautou-se na premissa de que a advocacia vai muito além da técnica: 
+            é, sobretudo, um compromisso com a ética, com a humanidade e com a busca incansável por justiça. 
+            Nascido da união de propósitos entre seus sócios fundadores, o escritório ergueu-se sobre três pilares
+             essenciais — o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
+              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente.
+          </p>
+          <p>
+            Desde a sua fundação, o escritório GF Advogados pautou-se na premissa de que a advocacia vai muito além da técnica: 
+            é, sobretudo, um compromisso com a ética, com a humanidade e com a busca incansável por justiça.
+Nossa trajetória é marcada pela busca constante por bons resultados, alcançados não por acaso, mas como consequência natural de um
+ trabalho sério, estratégico e comprometido. Atendendo pessoas físicas e jurídicas com o mesmo padrão de dedicação, entendemos que 
+ cada demanda carrega particularidades que merecem atenção individualizada.
+O GF Advogados reafirma, dia após dia, seu propósito: oferecer segurança jurídica com a solidez de quem entende que, por
+ trás de cada
+ processo, existe uma história,um direito e uma vida que merece ser defendida com competência e integridade.
+          </p>
+        </div>
+
+        <!-- Imagem vem depois no HTML = fica à direita no desktop -->
+        <div class="split-image">
+          <!-- Versão com fundo (não mais transparente), a pedido do cliente
+               pra visualizar como fica a moldura/sombra -->
+          <img src="images/socios-grupo-fundo.jpg" alt="Sócios do escritório GF Advogados" loading="lazy">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================
          SEÇÃO "SÓCIO 1"
          Layout: imagem à ESQUERDA, texto à DIREITA
          Reaproveita a mesma classe .split-grid da seção "Sobre",
@@ -183,8 +226,8 @@ O GF Advogados reafirma, dia após dia, seu propósito: oferecer segurança jur�
 
         <!-- Imagem vem primeiro no HTML = fica à esquerda no desktop -->
         <div class="split-image">
-          <!-- Troque pela foto real do sócio 1 -->
-          <img src="images/socio-1.png" alt="Foto de [Nome do Sócio 1]" loading="lazy">
+          <!-- Versão com fundo -->
+          <img src="images/socio-1-fundo.jpg" alt="Foto de Dr. Felipe Ferreira" loading="lazy">
         </div>
 
         <!-- Texto vem depois no HTML = fica à direita no desktop -->
@@ -200,46 +243,6 @@ O GF Advogados reafirma, dia após dia, seu propósito: oferecer segurança jur�
              puramente na excelência técnica processual, na mitigação de riscos e na busca pela melhor solução jurídica para o caso 
              concreto, independentemente da posição ocupada na lide
           </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================================
-         SEÇÃO DE VÍDEO
-         Vídeo de fundo que toca automaticamente quando o usuário
-         rola a página até ele (e pausa quando sai da tela — ver script.js).
-         Duas caixas com fundo semitransparente sobrepostas ao vídeo,
-         uma mais à esquerda e outra mais à direita.
-         ========================================================== -->
-    <section class="section video-section" id="video">
-      <div class="video-wrapper">
-
-        <!--
-          VÍDEO
-          - muted é obrigatório para o autoplay funcionar na maioria dos navegadores
-          - loop faz o vídeo repetir
-          - playsinline evita que o vídeo abra em tela cheia automaticamente no iPhone
-          - poster é a imagem mostrada antes do vídeo carregar/tocar
-          - troque o src abaixo pelo caminho do seu arquivo de vídeo
-        -->
-        <video class="bg-video" id="bgVideo" muted loop playsinline preload="metadata" poster="images/video-poster.jpg">
-          <source src="videos/video.mp4" type="video/mp4">
-          Seu navegador não suporta a exibição de vídeos HTML5.
-        </video>
-
-        <!-- Camada com as duas caixas de texto sobre o vídeo -->
-        <div class="video-overlay">
-          <div class="overlay-box overlay-box--left">
-            <p>Texto exemplo: o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
-              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
-              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. </p>
-          </div>
-          <div class="overlay-box overlay-box--right">
-            <p>[Texto exemplo: o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
-              uma atuação abrangente, sólida e verdadeiramente comprometida com as necessidades de cada cliente. o Direito Civil, o Direito Público e o Direito Trabalhista — áreas que, juntas, permitem
-              uma atuação abrangente,.]</p>
-          </div>
         </div>
 
       </div>
@@ -270,8 +273,8 @@ O GF Advogados reafirma, dia após dia, seu propósito: oferecer segurança jur�
         </div>
 
         <div class="split-image">
-          <!-- Troque pela foto real do sócio 2 -->
-          <img src="images/socio-2.png" alt="Foto de [Nome do Sócio 2]" loading="lazy">
+          <!-- Versão com fundo -->
+          <img src="images/socio-2-fundo.jpg" alt="Foto de Dr. Samuel Lucio Gomes" loading="lazy">
         </div>
 
       </div>
