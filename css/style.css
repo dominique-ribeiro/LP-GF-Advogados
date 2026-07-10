@@ -186,6 +186,12 @@ h3 {
 
 p {
   margin: 0 0 16px;
+  /* Justificado em TODO o site (não só nas seções "Sobre"/"Sócio").
+     `hyphens: auto` hifeniza palavras automaticamente quando precisa,
+     evitando espaços grandes demais entre palavras no texto justificado. */
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 a {
@@ -396,15 +402,9 @@ button:focus-visible {
   margin-bottom: 20px;
 }
 
-/* Texto justificado: alinha as bordas esquerda E direita do parágrafo.
-   `hyphens: auto` liga a hifenização automática do navegador (usando o
-   `lang="pt-BR"` lá do <html>), o que evita "buracos" de espaço grandes
-   demais entre palavras quando o texto é justificado. */
-.split-text p {
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-}
+/* (O texto justificado agora é padrão em todo o site — ver a regra "p"
+   lá em cima na seção 2 "RESET BÁSICO". Não precisa mais de uma regra
+   específica aqui.) */
 
 /*
    A pedido do cliente: nada de "vazamento" até a borda da seção. A foto
