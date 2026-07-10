@@ -14,11 +14,12 @@
                                        (derivada automaticamente; ajuste se quiser) */
   --color-accent: #E3A443;         /* dourado/âmbar - detalhes e destaques */
   --color-accent-light: #F1B36A;   /* dourado mais claro - hovers e variação */
-  /* PENDENTE: o código enviado para a 5ª cor veio incompleto ("#D672A" tem só
-     5 dígitos — um hexadecimal válido precisa de 3 ou 6). Por enquanto essa
-     variável está reaproveitando --color-accent-light; assim que você confirmar
-     o valor certo, é só atualizar aqui. */
-  --color-accent-deep: #F1B36A;    /* TODO: confirmar/trocar pelo código correto */
+  /* PENDENTE: o código enviado lá atrás para essa 5ª cor veio incompleto
+     ("#D672A" tem só 5 dígitos — um hexadecimal válido precisa de 3 ou 6).
+     Como agora ela é usada nos títulos das caixas do vídeo, defini um
+     dourado mais escuro "de trabalho" aqui — troque pelo valor certo
+     assim que você confirmar. */
+  --color-accent-deep: #9C7A29;    /* dourado mais escuro - títulos das caixas do vídeo */
   --color-text: #000000;           /* cor do texto principal */
   --color-text-soft: #4D4D4D;      /* cinza-escuro para texto secundário/legendas */
   --color-border: rgba(0, 0, 0, 0.12);
@@ -313,9 +314,11 @@ button:focus-visible {
   margin-left: auto; /* empurra só os ícones sociais para a direita */
 }
 
-/* Ícones agora são SVGs embutidos (Bootstrap Icons, licença MIT) — não
-   dependem mais de arquivos de imagem. A cor de cada um é controlada
-   aqui via `fill`, separada para header (dourado claro) e footer (branco). */
+/* Ícones são SVGs embutidos de bibliotecas open source (Bootstrap Icons,
+   Iconoir, Myna UI) — não dependem de arquivos de imagem. A cor de cada
+   um é controlada aqui via `color` (que tanto `fill` quanto `stroke`
+   seguem, através de currentColor), separada para header (dourado
+   claro) e footer (branco). */
 .social-icon {
   display: inline-flex;
   align-items: center;
@@ -327,14 +330,25 @@ button:focus-visible {
   width: 26px;
   height: 26px;
   display: block;
+  fill: currentColor; /* ícones "preenchidos" (ex: Bootstrap Icons) usam isso */
+}
+
+/* Ícones de "contorno" (ex: Iconoir, Myna UI) são desenhados com linhas
+   (stroke) em vez de preenchimento — essa classe ajusta esses casos. */
+.social-svg--stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .header-social .social-svg {
-  fill: var(--color-accent-light); /* dourado mais claro, igual ao menu */
+  color: var(--color-accent-light); /* dourado mais claro, igual ao menu */
 }
 
 .footer-social .social-svg {
-  fill: #fff;
+  color: #fff;
 }
 
 .social-icon:hover {
@@ -440,6 +454,17 @@ button:focus-visible {
   color: #fff;
 }
 
+/* "Sócio 1" e "Sócio 2" são vermelhos e ficam um logo depois do outro no
+   HTML — sem essa correção, o padding de baixo de um se soma ao padding
+   de cima do outro, criando um vão vermelho grande e vazio entre eles
+   (mais perceptível ainda no celular, onde as seções empilham). O
+   seletor "+" abaixo seleciona #socio-2 SÓ quando ele vem logo depois de
+   #socio-1, e zera o padding de cima dele — sobra só o padding de baixo
+   do #socio-1, que já é suficiente. */
+#socio-1 + #socio-2 {
+  padding-top: 0;
+}
+
 /* ============================================================
    6. SEÇÃO "ESPECIALIDADES"
    ============================================================ */
@@ -520,7 +545,7 @@ button:focus-visible {
 
 .overlay-box {
   max-width: 320px;
-  background-color: rgba(90, 6, 6, 0.6); /* var(--color-primary) com transparência */
+  background-color: rgba(90, 6, 6, 0.7); /* var(--color-primary) com transparência */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color: #fff;
@@ -531,6 +556,23 @@ button:focus-visible {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.1rem;
+}
+
+/* Título de cada caixa (ex: "Direito Civil"), em dourado mais escuro.
+   Usamos ".overlay-box p.overlay-title" (em vez de só ".overlay-title")
+   para ter certeza que ganha da regra genérica ".overlay-box p" acima. */
+.overlay-box p.overlay-title {
+  color: var(--color-accent-light);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+/* Duas versões do texto em cada caixa: uma mais longa para desktop, uma
+   mais curta para celular. Por padrão (desktop) mostramos a versão longa
+   e escondemos a curta; o media query no fim do arquivo inverte isso. */
+.overlay-text--mobile {
+  display: none;
 }
 
 .overlay-box--left {
@@ -743,7 +785,16 @@ button:focus-visible {
     text-align: left;
     /* Mais transparente só no celular (pedido do cliente): 0.35 de opacidade
        em vez do 0.6 usado no desktop (ver .overlay-box lá em cima). */
-    background-color: rgba(90, 6, 6, 0.35);
+    background-color: rgba(90, 6, 6, 0.6);
+  }
+
+  /* No celular, esconde o texto longo (desktop) e mostra o curto (mobile) */
+  .overlay-text--desktop {
+    display: none;
+  }
+
+  .overlay-text--mobile {
+    display: block;
   }
 
   .footer-grid {
