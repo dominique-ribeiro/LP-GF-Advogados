@@ -558,14 +558,23 @@ button:focus-visible {
   font-size: 1.1rem;
 }
 
-/* Título de cada caixa (ex: "Direito Civil"), em dourado mais escuro.
+/* Título de cada caixa (ex: "Direito Civil"), em dourado claro.
    Usamos ".overlay-box p.overlay-title" (em vez de só ".overlay-title")
-   para ter certeza que ganha da regra genérica ".overlay-box p" acima. */
+   para ter certeza que ganha da regra genérica ".overlay-box p" acima.
+   Só aparece no desktop — no celular fica escondido (ver media query
+   no fim do arquivo), pra não deixar o texto grande demais lá. */
 .overlay-box p.overlay-title {
   color: var(--color-accent-light);
   font-size: 1.3rem;
   font-weight: 600;
   margin: 0 0 10px;
+}
+
+/* No celular (sem o título), destacamos a área do direito direto dentro
+   do próprio texto curto, em dourado claro, no lugar do título. */
+.overlay-highlight {
+  color: var(--color-accent-light);
+  font-weight: 600;
 }
 
 /* Duas versões do texto em cada caixa: uma mais longa para desktop, uma
@@ -785,7 +794,7 @@ button:focus-visible {
     text-align: left;
     /* Mais transparente só no celular (pedido do cliente): 0.35 de opacidade
        em vez do 0.6 usado no desktop (ver .overlay-box lá em cima). */
-    background-color: rgba(90, 6, 6, 0.6);
+    background-color: rgba(90, 6, 6, 0.7);
   }
 
   /* No celular, esconde o texto longo (desktop) e mostra o curto (mobile) */
@@ -795,6 +804,12 @@ button:focus-visible {
 
   .overlay-text--mobile {
     display: block;
+  }
+
+  /* O título também some no celular — lá o destaque fica dentro do
+     próprio texto curto (ver .overlay-highlight) */
+  .overlay-box p.overlay-title {
+    display: none;
   }
 
   .footer-grid {
