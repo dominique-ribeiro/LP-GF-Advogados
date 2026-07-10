@@ -465,6 +465,20 @@ button:focus-visible {
   padding-top: 0;
 }
 
+/* Espaço entre o texto+foto do Sócio 2 e a foto extra dos sócios juntos
+   logo abaixo (dentro da mesma seção) */
+.socio2-extra-photo {
+  margin-top: 64px;
+}
+
+/* Essa foto usa a mesma moldura/sombra do .split-image, mas SEM o limite
+   de 420px de largura — aqui ela deve ocupar a largura toda do
+   container (o mesmo container do texto+imagem do Sócio 2 logo acima),
+   só respeitando o padding lateral que o .container já tem. */
+.socio2-extra-photo .split-image img {
+  max-width: 800px;
+} 
+
 /* ============================================================
    6. SEÇÃO "ESPECIALIDADES"
    ============================================================ */
@@ -772,17 +786,19 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  /* Um pouco mais de altura no celular, pra caber melhor o texto das
+     caixas sem parecer espremido */
   .video-wrapper {
-    height: 50vh;
-    min-height: 320px;
+    height: 55vh;
+    min-height: 380px;
   }
 
   .video-overlay {
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    padding: 24px;
-    gap: 16px;
+    padding: 20px;
+    gap: 14px;
   }
 
   .overlay-box,
@@ -792,6 +808,7 @@ button:focus-visible {
     align-self: stretch;
     margin: 0;
     text-align: left;
+    padding: 18px 20px; /* um pouco menor que os 28px 32px do desktop */
     /* Mais transparente só no celular (pedido do cliente): 0.35 de opacidade
        em vez do 0.6 usado no desktop (ver .overlay-box lá em cima). */
     background-color: rgba(90, 6, 6, 0.7);
@@ -804,6 +821,7 @@ button:focus-visible {
 
   .overlay-text--mobile {
     display: block;
+    font-size: 0.95rem; /* um pouco menor que o padrão, pra ocupar menos espaço */
   }
 
   /* O título também some no celular — lá o destaque fica dentro do
