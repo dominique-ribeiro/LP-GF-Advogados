@@ -380,7 +380,7 @@ button:focus-visible {
   display: block;
   width: 100%;
   height: 2px;
-  background-color: #fff;
+  background-color: var(--color-accent-light); /* dourado mais claro, igual ao resto do header */
 }
 
 /* ============================================================
@@ -454,15 +454,38 @@ button:focus-visible {
   color: #fff;
 }
 
-/* "Sócio 1" e "Sócio 2" são vermelhos e ficam um logo depois do outro no
-   HTML — sem essa correção, o padding de baixo de um se soma ao padding
-   de cima do outro, criando um vão vermelho grande e vazio entre eles
-   (mais perceptível ainda no celular, onde as seções empilham). O
-   seletor "+" abaixo seleciona #socio-2 SÓ quando ele vem logo depois de
-   #socio-1, e zera o padding de cima dele — sobra só o padding de baixo
-   do #socio-1, que já é suficiente. */
-#socio-1 + #socio-2 {
-  padding-top: 0;
+/*
+   Barrinha dourada separando SÓ "Sócio 1" de "Sócio 2" (não aparece
+   entre "Sobre" e "Sócio 1"). A mesma ideia da borda dourada em cada
+   card de Especialidades, só que aqui como divisor entre duas seções
+   inteiras. Dois cuidados para ela ficar certinha:
+
+   1) LARGURA: em vez de ir de ponta a ponta da tela, ela para na mesma
+      distância da borda que o .container usa em tudo (24px de cada
+      lado, até no máximo --container-width).
+   2) POSIÇÃO: usamos position:absolute com top:0 — isso tira a
+      barrinha do fluxo normal do documento, então ela NÃO consome nem
+      "rouba" espaço do padding da seção (diferente de usar margem
+      negativa, que colapsava o espaço debaixo dela sem querer). Ela
+      simplesmente fica sobreposta bem em cima da linha que separa as
+      duas seções, com o padding normal (e igual) de cada uma intacto
+      dos dois lados — por isso #socio-2 precisa de position:relative,
+      pra servir de referência de onde é esse "top:0".
+*/
+#socio-2 {
+  position: relative;
+}
+
+#socio-2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3px;
+  width: calc(100% - 48px);
+  max-width: calc(var(--container-width) - 48px);
+  background-color: var(--color-accent);
 }
 
 /* Espaço entre o texto+foto do Sócio 2 e a foto extra dos sócios juntos
@@ -554,12 +577,18 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 0 6%;
+  /* Mesma distância da borda que o .container usa (mesma "régua" das
+     caixas de Especialidades): 24px quando a tela é mais estreita que
+     var(--container-width), e (metade do espaço sobrando + 24px) quando
+     a tela é mais larga — é exatamente a mesma matemática do .container,
+     só que calculada aqui porque o vídeo ocupa a largura toda da página
+     (não está dentro de um .container). */
+  padding: 0 max(24px, calc((100% - var(--container-width)) / 2 + 24px));
 }
 
 .overlay-box {
   max-width: 320px;
-  background-color: rgba(90, 6, 6, 0.7); /* var(--color-primary) com transparência */
+  background-color: rgba(90, 6, 6, 0.8); /* var(--color-primary) com transparência */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   color: #fff;
@@ -732,10 +761,22 @@ button:focus-visible {
     height: 64px;
   }
 
-  /* Esconde o menu e os ícones sociais do header por padrão... */
-  .main-nav,
-  .header-social {
+  /* Esconde só o menu de navegação (ele vira o dropdown do hamburger).
+     Os ícones de redes sociais (.header-social) continuam visíveis aqui
+     — o cliente pediu pra aparecerem sempre, sem precisar abrir o menu. */
+  .main-nav {
     display: none;
+  }
+
+  /* Ícones um pouco menores no celular/tablet, pra não brigar de espaço
+     com o botão de hamburger ao lado */
+  .header-social {
+    gap: 10px;
+  }
+
+  .header-social .social-svg {
+    width: 22px;
+    height: 22px;
   }
 
   /* ...e mostra o botão de hamburger */
